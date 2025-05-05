@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<h2>Calendario Interactivo</h2>
+<input type="text" id="datepicker" placeholder="Selecciona un día">
+<div id="horarios" style="display: none;">
+    <p>Selecciona un horario:</p>
+    <div id="botones-horarios"></div>
+</div>
+
+<p id="mensaje"></p>
+
+{% endblock %}
