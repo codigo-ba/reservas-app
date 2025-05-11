@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Editar Turno</h2>
+
+{% if mensaje %}
+    <div class="alert {% if 'éxito' in mensaje %}alert-success{% else %}alert-error{% endif %}">
+        {{ mensaje }}
+    </div>
+{% endif %}
+
+<form method="post">
+    {% csrf_token %}
+    <label for="fecha">Nueva Fecha:</label>
+    <input type="text" id="fecha" name="fecha" value="{{ turno.fecha }}" placeholder="Selecciona una fecha">
+
+    <label for="hora">Nueva Hora:</label>
+    <select name="hora">
+        <option value="09:00" {% if turno.hora == "09:00" %}selected{% endif %}>09:00</option>
+        <option value="10:00" {% if turno.hora == "10:00" %}selected{% endif %}>10:00</option>
+        <option value="11:00" {% if turno.hora == "11:00" %}selected{% endif %}>11:00</option>
+        <option value="15:00" {% if turno.hora == "15:00" %}selected{% endif %}>15:00</option>
+        <option value="16:00" {% if turno.hora == "16:00" %}selected{% endif %}>16:00</option>
+        <option value="17:00" {% if turno.hora == "17:00" %}selected{% endif %}>17:00</option>
+        <option value="18:00" {% if turno.hora == "18:00" %}selected{% endif %}>18:00</option>
+        <option value="19:00" {% if turno.hora == "19:00" %}selected{% endif %}>19:00</option>
+    </select>
+
+    <button type="submit">Guardar cambios</button>
+</form>
+
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script>
+    flatpickr("#fecha", {
+        minDate: "today",
+        dateFormat: "Y-m-d"
+    });
+</script>
+
+<a href="{% url 'mis_turnos' %}">
+    <button>Cancelar y volver</button>
+</a>
+
+{% endblock %}

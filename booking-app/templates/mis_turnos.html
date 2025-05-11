@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Mis turnos reservados</h2>
+
+{% if turnos %}
+    <table>
+        <tr>
+            <th>Fecha</th>
+            <th>Hora</th>
+            <th>Acción</th>
+        </tr>
+        {% for turno in turnos %}
+        <tr>
+            <td>{{ turno.fecha }}</td>
+            <td>{{ turno.hora }}</td>
+            <td>
+                <form method="post" id="cancel-form-{{ turno.id }}">
+                    {% csrf_token %}
+                    <input type="hidden" name="turno_id" value="{{ turno.id }}">
+                    <button type="button" onclick="mostrarConfirmacion('{{ turno.id }}')">Cancelar turno</button>
+                </form>
+                <a href="{% url 'editar_turno' turno.id %}">
+                    <button>Editar turno</button>
+                </a>
+                
+                <!-- Modal de confirmación -->
+                <div id="confirm-modal-{{ turno.id }}" class="modal">
+                    <div class="modal-content">
+                        <p>¿Estás seguro de que quieres cancelar este turno?</p>
+                        <button onclick="document.getElementById('cancel-form-{{ turno.id }}').submit()">Aceptar</button>
+                        <button onclick="cerrarConfirmacion('{{ turno.id }}')">Cancelar</button>
+                    </div>
+                </div>
+            </td>
+        </tr>
+        {% endfor %}
+    </table>
+{% else %}
+    <p>No tienes turnos reservados.</p>
+{% endif %}
+
+<!-- Botón para volver a reservar -->
+<div style="margin-top: 20px;">
+    <a href="{% url 'reservar_turno' %}">
+        <button>Reservar otro turno</button>
+    </a>
+</div>
+
+{% endblock %}
