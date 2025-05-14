@@ -4,22 +4,25 @@
 {% block content %}
 <h2>Reserva tu turno</h2>
 
-{% if mensaje %}
-    <div class="alert {% if 'éxito' in mensaje %}alert-success{% else %}alert-error{% endif %}">
-        {{ mensaje }}
-    </div>
-
-    {% if "éxito" in mensaje %}
-        <div>
-            <a href="{% url 'reservar_turno' %}">
-                <button>Reservar otro turno</button>
-            </a>
-            <a href="{% url 'mis_turnos' %}">
-                <button>Ver mis turnos</button>
-            </a>
+{% if messages %}
+    {% for message in messages %}
+        <div class="alert {% if message.tags == 'success' %}alert-success{% else %}alert-error{% endif %}">
+            {{ message }}
         </div>
-    {% endif %}
+    {% endfor %}
 {% endif %}
+
+{% if messages and messages.success %}
+    <div>
+        <a href="{% url 'reservar_turno' %}">
+            <button>Reservar otro turno</button>
+        </a>
+        <a href="{% url 'mis_turnos' %}">
+            <button>Ver mis turnos</button>
+        </a>
+    </div>
+{% endif %}
+
 
 
 <form method="post">

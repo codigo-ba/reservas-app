@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content %}
+<h2>Bienvenido a Reservas de Turnos</h2>
+
+<p>Accede a tu cuenta o regístrate para empezar.</p>
+
+<div style="margin-top: 20px;">
+    <a href="{% url 'login' %}">
+        <button>Iniciar Sesión</button>
+    </a>
+    <a href="{% url 'registro' %}">
+        <button>Registrarse</button>
+    </a>
+</div>
+{% endblock %}

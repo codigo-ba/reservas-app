@@ -16,23 +16,16 @@
             <td>{{ turno.fecha }}</td>
             <td>{{ turno.hora }}</td>
             <td>
-                <form method="post" id="cancel-form-{{ turno.id }}">
+                <!-- Formulario para cancelar turno con CSRF -->
+                <form method="post" action="{% url 'cancelar_turno' turno.id %}">
                     {% csrf_token %}
-                    <input type="hidden" name="turno_id" value="{{ turno.id }}">
-                    <button type="button" onclick="mostrarConfirmacion('{{ turno.id }}')">Cancelar turno</button>
+                    <button type="submit">Cancelar turno</button>
                 </form>
+
+                <!-- Enlace para editar turno -->
                 <a href="{% url 'editar_turno' turno.id %}">
                     <button>Editar turno</button>
                 </a>
-                
-                <!-- Modal de confirmación -->
-                <div id="confirm-modal-{{ turno.id }}" class="modal">
-                    <div class="modal-content">
-                        <p>¿Estás seguro de que quieres cancelar este turno?</p>
-                        <button onclick="document.getElementById('cancel-form-{{ turno.id }}').submit()">Aceptar</button>
-                        <button onclick="cerrarConfirmacion('{{ turno.id }}')">Cancelar</button>
-                    </div>
-                </div>
             </td>
         </tr>
         {% endfor %}

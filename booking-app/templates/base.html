@@ -12,6 +12,23 @@
 <body>
     <header>
         <h1>Reservas de Turnos</h1>
+        <nav>
+            <ul>
+                {% if user.is_authenticated %}
+                    <li><a href="{% url 'reservar_turno' %}">Reservar Turno</a></li>
+                    <li><a href="{% url 'mis_turnos' %}">Mis Turnos</a></li>
+                    <li>
+                        <form method="post" action="{% url 'logout' %}">
+                            {% csrf_token %}
+                            <button type="submit">Cerrar Sesión</button>
+                        </form>
+                    </li>
+                {% else %}
+                    <li><a href="{% url 'login' %}">Iniciar Sesión</a></li>
+                    <li><a href="{% url 'registro' %}">Registrarse</a></li>
+                {% endif %}
+            </ul>
+        </nav>
     </header>
 
     <main>
