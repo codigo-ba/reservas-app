@@ -31,8 +31,11 @@ ALLOWED_HOSTS = ["localhost", "127.0.0.1", ".github.dev"]
 CSRF_TRUSTED_ORIGINS = ['http://localhost:8000', 'https://localhost:8000']
 CSRF_COOKIE_AGE = 86400  # Mantiene el token CSRF válido por 24 horas
 CSRF_USE_SESSIONS = True  # Usa la sesión en lugar de cookies para CSRF
-
-
+SESSION_COOKIE_AGE = 86400  # Mantiene la sesión activa por 24 horas
+SESSION_EXPIRE_AT_BROWSER_CLOSE = False  # Evita que la sesión expire al cerrar el navegador
+SESSION_ENGINE = "django.contrib.sessions.backends.db"  # Usa base de datos para gestionar sesiones
+CSRF_COOKIE_SECURE = False  # 🚀 Solo debe estar en True si usas HTTPS
+CSRF_COOKIE_HTTPONLY = False  # 🚀 Permite que JavaScript acceda a la cookie CSRF si es necesario
 
 # Application definition
 
@@ -130,6 +133,8 @@ STATICFILES_DIRS = [os.path.join(BASE_DIR, "static")]  # 📌 Cambiado a booking
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
+LOGIN_URL = "/login/"
 LOGIN_REDIRECT_URL = "/mis_turnos/"  # Redirige a la página de turnos después del login
-LOGOUT_REDIRECT_URL = '/'
+LOGOUT_REDIRECT_URL = "/"
+
 

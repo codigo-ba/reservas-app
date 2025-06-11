@@ -1,11 +1,11 @@
 from django.urls import path
 from django.contrib.auth import views as auth_views
-from .views import registro, reservar_turno, mis_turnos, editar_turno, pagina_inicio, cancelar_turno
+from .views import pagina_inicio, registro, iniciar_sesion, reservar_turno, mis_turnos, editar_turno, cancelar_turno, cerrar_sesion
 
 urlpatterns = [
     path("", pagina_inicio, name="inicio"),  # Página principal
-    path('login/', auth_views.LoginView.as_view(template_name='login.html'), name='login'),
-    path('logout/', auth_views.LogoutView.as_view(), name='logout'),
+    path("login/", iniciar_sesion, name="login"),  # 🚀 Nueva ruta para iniciar sesión
+    path("logout/", cerrar_sesion, name="logout"),
     path('registro/', registro, name='registro'),
     path("reservar/", reservar_turno, name="reservar_turno"),
     path("mis_turnos/", mis_turnos, name="mis_turnos"),

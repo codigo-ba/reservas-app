@@ -23,8 +23,6 @@
     </div>
 {% endif %}
 
-
-
 <form method="post">
     {% csrf_token %}
     <label for="fecha">Fecha:</label>
@@ -32,14 +30,11 @@
 
     <label for="hora">Hora:</label>
     <select name="hora">
-        <option value="09:00">09:00</option>
-        <option value="10:00">10:00</option>
-        <option value="11:00">11:00</option>
-        <option value="15:00">15:00</option>
-        <option value="16:00">16:00</option>
-        <option value="17:00">17:00</option>
-        <option value="18:00">18:00</option>
-        <option value="19:00">19:00</option>
+        {% for hora in horas_disponibles %}
+            <option value="{{ hora }}" {% if hora in turnos_ocupados %}disabled{% endif %}>
+                {{ hora }}
+            </option>
+        {% endfor %}
     </select>
 
     <button type="submit">Reservar Turno</button>

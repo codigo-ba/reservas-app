@@ -45,6 +45,15 @@
         function cerrarConfirmacion(turnoId) {
             document.getElementById("confirm-modal-" + turnoId).style.display = "none";
         }
+
+        // 🚀 Limpia la sesión del navegador al cerrar sesión para evitar datos residuales
+        document.querySelector("form[action='{% url 'logout' %}']").addEventListener("submit", function() {
+            localStorage.clear();  // Limpia almacenamiento previo
+            sessionStorage.clear();  // Borra datos de sesión en el navegador
+            setTimeout(() => {
+            window.location.reload();  // 🚀 Recarga la página para evitar sesiones corruptas
+            }, 500);
+        });
     </script>
 
 </body>

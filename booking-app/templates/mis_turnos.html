@@ -19,8 +19,10 @@
                 <!-- Formulario para cancelar turno con CSRF -->
                 <form method="post" action="{% url 'cancelar_turno' turno.id %}">
                     {% csrf_token %}
-                    <button type="submit">Cancelar turno</button>
+                    <input type="hidden" name="turno_id" value="{{ turno.id }}">
+                    <button type="submit">Cancelar</button>
                 </form>
+
 
                 <!-- Enlace para editar turno -->
                 <a href="{% url 'editar_turno' turno.id %}">
